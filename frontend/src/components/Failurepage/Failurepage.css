@@ -1,0 +1,111 @@
+/* General Container Styling */
+.payment-failure-container {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding-bottom: 24px;
+    margin-top: -64px;
+  }
+  
+  /* Image Section */
+  .image-section {
+    width: 100%;
+    text-align: center;
+    margin-top: 112px;
+  }
+  
+  .fail-image {
+    padding-top: 16px;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Text Section */
+  .text-section {
+    width: 100%;
+    text-align: center;
+    margin-top: 176px;
+    padding-top: 48px;
+  }
+  
+  .crossmark {
+    height: 64px;
+    padding: 8px;
+  }
+  
+  .payment-failure-title {
+    font-size: 2rem;
+    font-weight: bold;
+    padding-bottom: 48px;
+    margin-top: 16px;
+  }
+  
+  /* Button Styling */
+  .button-group {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+  }
+  
+  .try-again-btn,
+  .continue-shopping-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    color: white;
+    text-decoration: none;
+    font-size: 1.25rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .try-again-btn {
+    background-color: hsl(300, 42%, 54%); 
+  }
+  
+  .try-again-btn:hover {
+    background-color: #aa0909;
+  }
+  
+  .continue-shopping-btn {
+    background-color: #10b981; 
+  }
+  
+  .continue-shopping-btn:hover {
+    background-color: #05471b;
+  }
+  
+  /* Responsive Styles */
+  @media (min-width: 1024px) {
+    .payment-failure-container {
+      flex-direction: row-reverse;
+      padding: 0 64px;
+    }
+  
+    .image-section {
+      width: 50%;
+      margin-top: 112px;
+      padding-right: 16px;
+    }
+  
+    .text-section {
+      width: 50%;
+      text-align: center;
+      padding-left: 16px;
+      margin-top: 48px;
+    }
+  
+    .crossmark {
+      height: 80px;
+    }
+  
+    .payment-failure-title {
+      font-size: 3rem;
+      padding-bottom: 0;
+    }
+  
+    .button-group {
+      gap: 32px;
+    }
+  }
+  

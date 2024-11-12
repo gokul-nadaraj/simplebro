@@ -1,0 +1,427 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    gap: 20px;
+  
+    flex-wrap: wrap;
+    margin-top: 100px;
+    max-width: 70%;
+  
+  }
+  
+  .banner {
+    flex: 1;
+    background-size: cover;
+    background-position: center;
+
+    height: 400px;
+    /* Adjust the height as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  
+  .banner-container {
+    position: relative;
+  
+  }
+  
+  .banner-container img {
+    max-width: 300px;
+    max-height: 300px;
+    position: absolute;
+    right: -180px;
+    top: -100px;
+    transform: translate(50%);
+  
+  }
+  
+  .banner-container .btn {
+    background-color: rgba(10, 146, 62, 0.671);
+    color: white;
+    margin-right: 50px;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+  
+  }
+  
+  .btn-container .btn {
+    background-color: rgb(6, 126, 52);
+    margin-left: 60px;
+    margin-top: 80px;
+    color: white;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+  
+  }
+  
+  
+  
+  .shop-container {
+    display: flex;
+    justify-content: space-around;
+    margin-left: 400px;
+  
+  }
+  
+  .shop h2 {
+    margin-bottom: 20px;
+    color: rgba(255, 166, 0, 0.753);
+  }
+  
+  .shop h1 {
+    font-weight: bold;
+    font-size: 35px;
+  }
+  
+  .shop p {
+    margin-top: 15px;
+  
+  }
+  
+  
+  .shop button {
+    padding: 10px 20px;
+    background-color: #49b908;
+    color: white;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+    margin-top: 23px;
+  }
+  
+  .shop button:hover {
+    background-color: #ff383d;
+  }
+  
+  
+  
+  .btn {
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  /* payment form */
+  /* Form Container */
+  
+  
+  .form-container2 {
+    /* display: none;  */
+    position: absolute;
+    top: 0;
+    left: 15px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin-top: 150px;
+    margin-left: 100px;
+    width: 500px;
+    padding: 20px;
+    z-index: 999;
+  }
+  
+  /* Form Heading */
+  .form-heading2{
+    text-align: center;
+  
+  }
+  
+  /* Form Group */
+  .form-class {
+    margin-bottom: 15px;
+  }
+  
+  /* Form Label */
+  .form-label {
+    font-size: 1rem;
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  /* Form Input */
+  .form-input {
+    width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      outline: none;
+      transition: border-color 0.3s ease;
+   
+  }
+  
+  /* Error Message */
+  .error-message {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 5px;
+  }
+  
+  /* Submit Button */
+  .submit-button {
+    background-color: #f9a825;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(255, 255, 255);
+    z-index: 998;
+  
+    backdrop-filter: blur(5px);
+  }
+  .form-input:focus {
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  .form-label {
+    font-size: 1rem;
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  
+  .submit-button:hover {
+    background-color: #f57f17;
+  }
+  
+  
+  .form-container.show-form {
+    display: block;
+   background-color: #fff;
+   
+  }
+  
+  body.show-overlay {
+    
+    overflow: visible;
+  }
+  
+  .box-container{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  
+  }
+  .box11{
+    height: 40px;
+    width: 40px;
+    background-image: url('/images/visa.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: #49b908;
+    border-radius: 50%;
+  }
+  .box12{
+    height: 40px;
+    width: 40px;
+    background-image: url('/images/gpay.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: #49b908;
+    border-radius: 50%;
+  }
+  .box13{
+    height: 40px;
+    width: 40px;
+    background-image: url('/images/phonepay.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: #49b908;
+    border-radius: 50%;
+  }
+  .box14{
+    height: 40px;
+    width: 40px;
+    background-image: url('/images/mastercard.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: #49b908;
+    border-radius: 50%;
+  }
+  .box15{
+    height: 40px;
+    width: 40px;
+    background-image: url('/images/paytm.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: #49b908;
+    border-radius: 50%;
+  }
+  .pay1 p {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  /* Mobile-Specific Adjustments */
+  @media (max-width: 992px) {
+    .buy-now-toggle {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 12px 20px;
+      background-color: #4106e2e1;
+      color: white;
+      border: none;
+      font-weight: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+  
+    .buy-now-toggle:hover {
+      background-color: #178af5;
+    }
+  
+    /* Make sure the error message is clearly visible */
+    .error-message {
+      font-size: 0.9rem;
+      /* Keep the error messages at a readable size */
+    }
+  }
+  
+  /* Form Container */
+  .form-container1{
+    position: absolute;
+    position: fixed;
+    right: 0;
+    margin-right: 10px;
+    width: 400px;
+    
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 10px 10px;
+  
+  }
+  .form-heading1{
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .form-group1 {
+    margin-bottom: 20px;
+  }
+  .error-message1 {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 5px;
+  }
+  .form-input1 {
+    width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      outline: none;
+      transition: border-color 0.3s ease;
+     
+    }
+    .form-input1:focus {
+      border-color: #007BFF;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+    .form-label {
+      font-size: 1rem;
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+    }
+  
+    .submit-button1 {
+      background-color: #f9a825;
+      color: white;
+      padding: 12px 10px;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 10px;
+      border-radius: 10px;
+      transition: background-color 0.3s ease;
+    }
+  
+    
+  .box-container1{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  
+  }
+  .box1{
+    height: 40px;
+    width: 40px;
+    background-image: url('/images/visa.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: #49b908;
+    border-radius: 50%;
+  }
+  .box2{
+    height: 40px;
+    width: 40px;
+    background-image: url('/images/gpay.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: #49b908;
+    border-radius: 50%;
+  }
+  .box3{
+    height: 40px;
+    width: 40px;
+    background-image: url('/images/phonepay.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: #49b908;
+    border-radius: 50%;
+  }
+  .box4{
+    height: 40px;
+    width: 40px;
+    background-image: url('/images/mastercard.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: #49b908;
+    border-radius: 50%;
+  }
+  .box5{
+    height: 40px;
+    width: 40px;
+    background-image: url('/images/paytm.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: #49b908;
+    border-radius: 50%;
+  }
+  .pay p {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
