@@ -1,28 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { TbFileDownload } from "react-icons/tb";
+import { TbFileCode2, TbFileDownload } from "react-icons/tb";
 import { PiDownload } from "react-icons/pi";
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import image from '/images/myimage.png';
 import { useUser } from "../UserContext"; // Adjust the path according to your folder structure
 import './FinalPage.css';
+import  genarateReceipt  from '..//utils/GenarateReceipt';
 import axios from 'axios';
 
 const FinalPage = () => {
   const { userData, paymentDetails } = useUser();
   const [currentDate, setCurrentDate] = useState('');
   const [receiptUrl, setReceiptUrl] = useState('');
+  const [order, setOrder] = useState({ userData, paymentDetails: '' });
   const [file1, setFile1] = useState('');
-  const [order, setOrder] = useState('')
 
+  // Set order state when userData and paymentDetails change
+  useEffect(() => {
+    setOrder({ userData, paymentDetails });
+  }, [userData, paymentDetails]);
 
-
-  // Ensure the current date is formatted properly
+  // Format the current date
   useEffect(() => {
     const date = new Date();
     setCurrentDate(date.toLocaleDateString());
   }, []);
-
 
   // Generate a unique invoice ID
   useEffect(() => {
@@ -40,74 +43,59 @@ const FinalPage = () => {
     };
 
     const invoiceId = generateInvoiceId();
-    // You can use invoiceId later if needed
     console.log("Invoice ID:", invoiceId);
   }, []);
 
-
-
+  // Function to send email with receipt and ebook
   const sendEmail = async (order, fileBlob, filename) => {
     const formData = new FormData();
-    const userName = order.user[0].name1;
-    const userEmail = order.user[0].email; // Assuming you have user email here
-    const razorpayOrderId = order.paymentDetails.razorpay_order_id;
-    const razorpayPaymentId = order.paymentDetails.razorpay_payment_id;
-  
+    const userName = order.userData?.[0]?.name;
+    const userEmail = order.userData?.[0]?.email;
+    const razorpayOrderId = order.paymentDetails?.razorpay_order_id;
+    const razorpayPaymentId = order.paymentDetails?.razorpay_payment_id;
+
     formData.append('to', userEmail);
     formData.append('subject', 'Your Order Receipt from TinyKarts');
     formData.append('username', userName);
     formData.append('orderid', razorpayOrderId);
     formData.append('paymentid', razorpayPaymentId);
-  
-    // Append fileBlob (receipt) to formData as file1
     formData.append('file1', fileBlob, filename);
-  
+
     try {
-      // Fetch ebook.pdf from the public directory
-      const ebookResponse = await fetch('/ebook.pdf'); // Ensure this URL is correct
+      const ebookResponse = await fetch('/ebook.pdf');
       const ebookBlob = await ebookResponse.blob();
-  
-      // Append the ebook.pdf as file2
       formData.append('file2', ebookBlob, 'ebook.pdf');
-  
-   
-      // Send the formData with both files
+
       const response = await axios.post('https://178sjvr7ai.execute-api.ap-south-1.amazonaws.com/send-email', formData, {
-        headers: {
-          'Accept': 'application/json',
-          // 'Content-Type' is automatically set to multipart/form-data with FormData, so no need to set it manually
-        },
+        headers: { 'Accept': 'application/json' },
       });
       console.log(response.data);
     } catch (error) {
       console.error('Error:', error.response ? error.response.data : error.message);
     }
   };
-  
-  
-  
+
+  // Generate and send the receipt
   useEffect(() => {
     const fetchReceiptUrl = async () => {
-      const { blob, url, filename } = await generateReceipt(order);
+      const { blob, url, filename } = await genarateReceipt(order);
       setReceiptUrl(url);
       setFile1(filename);
-
+console.log(blob,url,filename)
       await sendEmail(order, blob, filename);
     };
-  
-})
-   
 
-  // Function to send email with the receipt
-
-  
+    if (order?.userData && order?.paymentDetails) {
+      fetchReceiptUrl();
+    }
+  }, [order]);
 
   return (
     <motion.section
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 5 }}>
-      
+      transition={{ duration: 5 }}
+    >
       <section className="final-page">
         <h1 className="thank-you-heading">Thank You for Shopping!</h1>
         <div className="content-wrapper">
@@ -127,7 +115,7 @@ const FinalPage = () => {
             </div>
 
             <div className="invoice-details">
-              <h2>Invoice ID:{paymentDetails?.invoiceId}</h2>
+              <h2>Invoice ID: {paymentDetails?.invoiceId}</h2>
               <h2>Date: {currentDate}</h2>
             </div>
 
@@ -172,3 +160,5 @@ const FinalPage = () => {
 };
 
 export default FinalPage;
+
+

@@ -40,58 +40,54 @@ const FinalPage = () => {
   }, []);
 
   // Function to send email with the receipt
-  const sendEmail = async (order, fileBlob, filename) => {
-    const formData = new FormData();
-    const userName = order.user[0]?.name1 || 'Customer';
-    const userEmail = order.user[0]?.email;
-    const razorpayOrderId = order.paymentDetails?.razorpay_order_id || '';
-    const razorpayPaymentId = order.paymentDetails?.razorpay_payment_id || '';
+  
+const sendEmail = async (order, fileBlob, filename) => {
+  const formData = new FormData();
+  const userName = order.user[0]?.name1 || 'Customer';
+  const userEmail = order.user[0]?.email;
+  const razorpayOrderId = order.paymentDetails?.razorpay_order_id || '';
+  const razorpayPaymentId = order.paymentDetails?.razorpay_payment_id || '';
 
-    formData.append('to', userEmail);
-    formData.append('subject', 'Your Order Receipt from TinyKarts');
-    formData.append('username', userName);
-    formData.append('orderid', razorpayOrderId);
-    formData.append('paymentid', razorpayPaymentId);
-    formData.append('file1', fileBlob, filename);
+ 
+  formData.append('to', userEmail);
+  formData.append('subject', 'Your Order Receipt from TinyKarts');
+  formData.append('username', userName);
+  formData.append('orderid', razorpayOrderId);
+  formData.append('paymentid', razorpayPaymentId);
+  formData.append('file1', fileBlob, filename);
 
-    try {
-      const ebookResponse = await fetch('/ebook.pdf');
-      const ebookBlob = await ebookResponse.blob();
-      formData.append('file2', ebookBlob, 'ebook.pdf');
+  try {
+    const ebookResponse = await fetch('/ebook.pdf');
+    const ebookBlob = await ebookResponse.blob();
+    formData.append('file2', ebookBlob, 'ebook.pdf');
 
-      const response = await axios.post('https://178sjvr7ai.execute-api.ap-south-1.amazonaws.com/send-email', formData, {
-        headers: {
-          'Accept': 'application/json',
-        },
-      });
-      console.log(response.data);
-    } catch (error) {
-      console.error('Error sending email:', error.response ? error.response.data : error.message);
-    }
-  };
+    const response = await axios.post('https://178sjvr7ai.execute-api.ap-south-1.amazonaws.com/send-email', formData, {
+      headers: {
+        'Accept': 'application/json',
+      },
+    });
+    console.log(response.data);
+  } catch (error) {
+    console.error('Error sending email:', error.response ? error.response.data : error.message);
+  }
+};
 
-  // Function to fetch and generate receipt URL
-  const generateReceipt = async (user, paymentDetails) => {
-    // Implement your receipt generation logic here
-    // You should return the blob, url, and filename
-    return { blob: new Blob(), url: '/path/to/receipt.pdf', filename: 'receipt.pdf' };
-  };
 
-  // Fetch the receipt URL and send email after payment details are set
-  useEffect(() => {
-    if (paymentDetails) {
-      const fetchReceiptUrl = async () => {
-        const { blob, url, filename } = await generateReceipt(userData, paymentDetails);
-        setReceiptUrl(url);
-        setFile1(filename);
 
-        await sendEmail({ user: userData, paymentDetails }, blob, filename);
-      };
+useEffect(() => {
+  if (paymentDetails && userData) {
+    const fetchReceiptUrl = async () => {
+      const { blob, url, filename } = await generateReceipt({ userData, paymentDetails });
+      setReceiptUrl(url);
+      setFile1(filename);
 
-      fetchReceiptUrl();
-    }
-  }, [userData, paymentDetails]);
+      // Send the email with the generated PDF
+      await sendEmail({ user: userData, paymentDetails }, blob, filename);
+    };
 
+    fetchReceiptUrl();
+  }
+}, [userData, paymentDetails]);
   return (
     <motion.section
       initial={{ opacity: 0 }}

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import Crossmark from '/images/cross.png'
+import Crossmark from '/images/logo.png'
 import FailImg from '/images/failure.png'
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
